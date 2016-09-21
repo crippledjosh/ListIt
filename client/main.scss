@@ -1,0 +1,53 @@
+@import "../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+
+.header{
+	margin-bottom: 40px;
+}
+
+.ingredient-button-wrapper{
+	position:relative;
+}
+
+.ingredient-delete{
+	position:absolute;
+	bottom: 0;
+	right: 0;
+}
+
+.ingredient-edit{
+	position:absolute;
+	bottom: 0;
+	right: 80px;
+}
+
+.ingredient-list{
+	display:flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.ingredient-thumb-nail{
+	width: 150px;
+	position:relative;
+}
+
+.ingredient{
+	width: 100%;
+	height: 100%;
+}
+
+.ingredient-thumb-nail .display-property {
+    background-color: #e7e7e7;
+    opacity: 0.95;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    color: black;
+    padding: 8px 8px 5px;
+    width:100%;
+}
+
+.error{
+	color:red;
+}

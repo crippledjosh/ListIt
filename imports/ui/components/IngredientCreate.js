@@ -102,6 +102,10 @@ class IngredientCreate extends Component{
 				{
 					index,
 					name
+				},
+				measurementSubtype:{
+					index: 0,
+					name: this.props.measurements[index].subtypes[0].name
 				}
 			}
 		)
@@ -128,7 +132,7 @@ class IngredientCreate extends Component{
 					onClick={this.open}
 					className={this.props.buttonClass}
 				>
-				Add Ingredient
+				{this.props.creating ? 'Add Ingredient' : 'Edit'}
 				</Button>
 
 				<Modal show={this.state.showModal} onHide={this.close}>

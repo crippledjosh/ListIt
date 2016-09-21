@@ -27,6 +27,10 @@ Ingredients.schema = new SimpleSchema({
 		type: String,
 		label: 'User that the ingredient is related to'
 	},
+	included: {
+		type: Boolean,
+		label: 'Says if the item should be added to shopping lists by default'
+	},
 	measurement: {
 		type: MeasurementSchema,
 		label: 'Object representing the measurement defaults of the ingredient'

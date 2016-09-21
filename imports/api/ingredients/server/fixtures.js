@@ -13,6 +13,7 @@ Meteor.startup(() => {
 				name,
 				image,
 				userId,
+				included:true,
 				measurement:{
 					defaultType: 'Volume',
 					defaultSubtype: 'ml'

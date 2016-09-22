@@ -13,6 +13,7 @@ module.exports = {
             "jsx": true,
             "impliedStrict": true
         },
+        "allowImportExportEverywhere": true,
         "sourceType": "module"
     },
     "plugins": [

@@ -63,7 +63,8 @@ const addIngredient = () => {
 	const uploader = component.refs.imageUploader
 	const ingredientState = getIngredientState()
 	if(image){
-		uploader.upload().then(uploadResolve, uploadReject)
+		uploader.upload()
+		upsertIngredient(ingredientState)
 	}
 	else {
 		upsertIngredient(ingredientState)

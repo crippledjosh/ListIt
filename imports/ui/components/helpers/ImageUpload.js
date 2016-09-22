@@ -10,7 +10,7 @@ class ImageUpload extends Component{
 		this.state = {file: undefined}
 	}
 	componentWillMount(){
-		Slingshot.fileRestrictions('image', {
+		Slingshot.fileRestrictions('avatar', {
 			allowedFileTypes: ['image/png', 'image/jpeg', 'image/gif'],
 			maxSize: 2 * 500 * 5000
 		})
@@ -24,22 +24,24 @@ class ImageUpload extends Component{
 		}
 	}
 	upload = () => {
-		return new Promise((resolve, reject) => {
-			const uploader = new Slingshot.Upload('Images')
-			uploader.send(this.state.file, function (error, downloadUrl) { // you can use refs if you like
-				debugger
-				if (error) {
-					reject(error, uploader.xhr.response)
-				}
-				else {
-				// we use $set because the user can change their avatar so it overwrites the url :)
-					console.log(downloadUrl) 
-					resolve()
-				}
-				// you will need this in the event the user hit the update button because it will remove the avatar url
-				this.setState({avatar: downloadUrl})
-			}.bind(this))
-		})
+		debugger
+		const userId = Meteor.user()._id
+		const metaContext = {avatarId: userId}
+		const uploader = new Slingshot.Upload('Images', metaContext)
+		uploader.send(this.state.file, function (error, downloadUrl) { // you can use refs if you like
+			debugger
+			if (error) {
+			// Log service detailed response
+				console.error('Error uploading', uploader.xhr.response)
+				alert (error) // you may want to fancy this up when you're ready instead of a popup.
+			}
+			else {
+			// we use $set because the user can change their avatar so it overwrites the url :)
+				console.log(downloadUrl) 
+			}
+			// you will need this in the event the user hit the update button because it will remove the avatar url
+			this.setState({avatar: downloadUrl})
+		}.bind(this))
 	}
 	openDrop = () => {
 		this.refs.dropzone.open()

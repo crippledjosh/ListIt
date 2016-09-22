@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import {Button, Modal, Checkbox, FormGroup, FormControl, ControlLabel} from 'react-bootstrap'
+import {Button, Modal, Checkbox, FormGroup, FormControl, ControlLabel, Row} from 'react-bootstrap'
+import ImageUpload from './helpers/ImageUpload'
 import FieldGroup from './helpers/FieldGroup'
 import addIngrdient from '../../modules/add-ingredient'
 import _ from 'lodash'
@@ -13,7 +14,7 @@ class IngredientCreate extends Component{
 			measurementType: {index:0, name:this.props.measurements[0].name},
 			measurementSubtype:{index:0, name:this.props.measurements[0].subtypes[0].name},
 			name: '',
-			image: ''
+			image: undefined
 		}
 
 		if(!this.props.creating){
@@ -124,6 +125,13 @@ class IngredientCreate extends Component{
 			}
 		)
 	}
+	onDrop = (file) =>{
+		this.setState(
+			{
+				image: file
+			}
+		)
+	}
 	render() {
 		return (
 			<div>
@@ -151,15 +159,7 @@ class IngredientCreate extends Component{
 								value={this.state.name}
 								onChange={this.controlChangeHandler}
 							/>
-							<FieldGroup
-								id="ingredientImageControl"
-								type="file"
-								label="Image of food"
-								help="This is just an image of your ingredient"
-								ref="image"
-								name="image"
-								onChange={this.controlChangeHandler}
-							/>
+							<ImageUpload ref="imageUploader" onDrop={this.onDrop} />
 							<FormGroup controlId="measurementSelectType">
 								<ControlLabel>Default Measurement Type</ControlLabel>
 								<FormControl componentClass="select" placeholder="select" value={this.state.measurementType.name} onChange={this.measurementTypeSelectHandler}>

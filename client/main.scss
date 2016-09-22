@@ -37,6 +37,22 @@
 	height: 100%;
 }
 
+.image-preview{
+	width: 300px;
+	height: 200px;
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+.image-dropzone{
+	display: inline-block;
+	width: 200px;
+	height: 200px;
+	border: dashed;
+	padding: 10px;
+	margin-right: 40px;
+}
+
 .ingredient-thumb-nail .display-property {
     background-color: #e7e7e7;
     opacity: 0.95;

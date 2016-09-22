@@ -2,10 +2,13 @@ import Ingredients, {MeasurementSchema} from './collection'
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import { ValidatedMethod } from 'meteor/mdg:validated-method' 
 
+
+
+
 const ingredientStateSchema = new SimpleSchema({
 	name: { type: String },
 	included: { type: Boolean },
-	image: { type: String },
+	image: { type: Object },
 	measurement: {
 		type: MeasurementSchema
 	}

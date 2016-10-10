@@ -1,7 +1,7 @@
 import React from 'react'
 import {Bert} from 'meteor/themeteorchef:bert'
 import {Media, Grid, Row, Col, ListGroup, ListGroupItem, Checkbox, Button, Panel, Label} from 'react-bootstrap'
-import IngredientCreate from '../containers/ingredient-create'
+import {IngredientCreateContainer} from '../containers/ingredient-create'
 
 
 const handleRemoveIngredient = (remove) => {
@@ -16,9 +16,9 @@ const handleRemoveIngredient = (remove) => {
 			}
 		})
 	}
-}
+};
 
-const IngredientView = ({ingredient,handleDelete}) => {
+export const IngredientView = ({ingredient,handleDelete}) => {
 	return(
 		<Panel header={ingredient.name}>
 			<Grid>
@@ -54,16 +54,14 @@ const IngredientView = ({ingredient,handleDelete}) => {
 				</Media>
 			</Grid>
 			<div className="ingredient-button-wrapper">
-				<IngredientCreate buttonClass="ingredient-edit" ingredient={ingredient} />
+				<IngredientCreateContainer buttonClass="ingredient-edit" ingredient={ingredient} />
 				<Button className="ingredient-delete" bsStyle="danger" onClick={handleRemoveIngredient.bind(null, handleDelete)}>Delete</Button>
 			</div>
 		</Panel>
 	)
-}
-	
+};
+
 IngredientView.propTypes = {
 	ingredient: React.PropTypes.object,
 	handleDelete: React.PropTypes.func
-}
-
-export default IngredientView
+};

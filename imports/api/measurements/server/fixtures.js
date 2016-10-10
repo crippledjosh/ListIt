@@ -1,4 +1,4 @@
-import Measurements from '../collection.js'
+import {Measurements} from '../collection.js';
 
 const data = [
 	{
@@ -49,7 +49,7 @@ const data = [
 		],
 		standard_unit: 'grams'
 	}
-]
+];
 
 
 Meteor.startup(() => {
@@ -58,4 +58,4 @@ Meteor.startup(() => {
 			Measurements.insert(measurement)
 		})
 	}
-})
+});

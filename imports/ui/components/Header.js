@@ -1,14 +1,14 @@
-import React from 'react'
-import { Navbar } from 'react-bootstrap'
-import { Link } from 'react-router'
-import { PublicNavigation } from './PublicNavigation'
-import { AuthenticatedNavigation } from './AuthenticatedNavigation'
+import React from 'react';
+import { Navbar } from 'react-bootstrap';
+import { Link } from 'react-router';
+import { PublicNavigation } from './PublicNavigation';
+import { AuthenticatedNavigation } from './AuthenticatedNavigation';
 
 const renderNavigation = (hasUser) => {
 	return hasUser ? <AuthenticatedNavigation /> : <PublicNavigation />
-}
+};
 
-const Header = (props) => {
+export const Header = (props) => {
 	return (
 		<Navbar className="header">
 			<Navbar.Header>
@@ -22,10 +22,8 @@ const Header = (props) => {
 			</Navbar.Collapse>
 		</Navbar>
 	)
-}
+};
 
 Header.propTypes = {
 	hasUser: React.PropTypes.object
-}
-
-export default Header
+};

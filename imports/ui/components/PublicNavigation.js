@@ -1,6 +1,6 @@
-import React from 'react'
-import { LinkContainer } from 'react-router-bootstrap'
-import { Nav, NavItem } from 'react-bootstrap'
+import React from 'react';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Nav, NavItem } from 'react-bootstrap';
 
 export const PublicNavigation = () => (
   <Nav pullRight>
@@ -11,4 +11,4 @@ export const PublicNavigation = () => (
       <NavItem eventKey={ 2 } href="/login">Log In</NavItem>
     </LinkContainer>
   </Nav>
-)
+);

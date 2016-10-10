@@ -5,20 +5,20 @@ import { Accounts } from 'meteor/accounts-base'
 import { Bert } from 'meteor/themeteorchef:bert'
 import { getInputValue } from './get-input-value'
 
-let component
-let token
+let component;
+let token;
 
 const handleReset = () => {
-	const password = getInputValue(component.refs.newPassword)
+	const password = getInputValue(component.refs.newPassword);
 	Accounts.resetPassword(token, password, (error) => {
 		if (error) {
 			Bert.alert(error.reason, 'danger')
 		} else {
-			browserHistory.push('/')
+			browserHistory.push('/');
 			Bert.alert('Password reset!', 'success')
 		}
 	})
-}
+};
 
 const validate = () => {
 	$(component.refs.resetPassword).validate({
@@ -45,10 +45,10 @@ const validate = () => {
 		},
 		submitHandler() { handleReset() }
 	})
-}
+};
 
 export const handleResetPassword = (options) => {
-	component = options.component
-	token = options.token
+	component = options.component;
+	token = options.token;
 	validate()
-}
+};

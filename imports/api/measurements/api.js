@@ -1,4 +1,2 @@
-if(Meteor.isServer){
-	import './server/fixtures'
-	import './server/publications'
-}
+import './server/fixtures';
+import './server/publications';

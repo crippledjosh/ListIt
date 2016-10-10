@@ -22,7 +22,10 @@ module.exports = {
     "rules": {
         "indent": [
             "error",
-            "tab"
+            "tab",
+			{
+				"SwitchCase": 1
+			}
         ],
         "linebreak-style": [
             "error",
@@ -32,10 +35,6 @@ module.exports = {
             "error",
             "single"
         ],
-        "semi": [
-            "error",
-            "never"
-        ],
         "react/no-find-dom-node": "off"
     }
-}
+};

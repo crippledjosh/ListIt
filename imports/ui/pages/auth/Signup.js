@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import { Link } from 'react-router'
-import { Row, Col, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap'
-import { handleSignup } from '../../../modules/signup'
+import React, {Component} from 'react';
+import { Link } from 'react-router';
+import { Row, Col, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import { handleSignup } from '../../../modules/signup';
 
 export class Signup extends Component {
 	componentDidMount() {

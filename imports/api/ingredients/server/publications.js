@@ -1,28 +1,27 @@
 import { Meteor } from 'meteor/meteor'
-import Ingredients from '../collection'
+import { Ingredients } from '../collection'
 
-Meteor.publish('ingredients', function(limit, searchValue) {
-	check(limit, Number)
-	check(searchValue, Match.OneOf(String, undefined, null))
+Meteor.publish('ingredients', function(limit = 50, searchValue) {
+	check(limit, Number);
+	check(searchValue, Match.OneOf(String, undefined, null));
 
 	let query = {userId: this.userId},
-		projection = {limit, sort:{name: 1}}
+		projection = {limit, sort:{name: 1}};
 
 	if (searchValue) {
-		let regex = new RegExp( searchValue, 'i' )
-		query.name = regex
-		projection.fields = {score: { $meta: 'textScore' }}
+		query.name = new RegExp( searchValue, 'i' );
+		projection.fields = {score: { $meta: 'textScore' }};
 		projection.sort = {score: { $meta: 'textScore' }}
 	}
-	
+
 	return Ingredients.find(query, projection)
-})
+});
 
 Meteor.publish('ingredient', function(id) {
-	check(id, String)
+	check(id, String);
 
-	let query = {userId: this.userId, _id:id}
-	
+	let query = {userId: this.userId, _id:id};
+
 	return Ingredients.find(query)
-})
+});
 

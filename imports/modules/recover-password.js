@@ -4,7 +4,7 @@ import { Accounts } from 'meteor/accounts-base'
 import { Bert } from 'meteor/themeteorchef:bert'
 import { getInputValue } from './get-input-value'
 
-let component
+let component;
 
 const handleRecovery = () => {
 	Accounts.forgotPassword({
@@ -16,7 +16,7 @@ const handleRecovery = () => {
 			Bert.alert('Check your inbox for a reset link!', 'success')
 		}
 	})
-}
+};
 
 const validate = () => {
 	p(component.refs.recoverPassword).validate({
@@ -34,9 +34,9 @@ const validate = () => {
 		},
 		submitHandler() { handleRecovery() }
 	})
-}
+};
 
 export const handleRecoverPassword = (options) => {
-	component = options.component
+	component = options.component;
 	validate()
-}
+};

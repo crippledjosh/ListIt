@@ -1,77 +1,80 @@
 import $ from 'jquery'
 import 'jquery-validation'
-import {insertIngredient, updateIngredient} from '../api/ingredients/methods'
+import {insertIngredient, updateIngredient, updateIngredientImage} from '../api/ingredients/methods'
 import { Bert } from 'meteor/themeteorchef:bert'
 
-let component
+let component;
 
-const updateIngredientCall = (ingredientState) =>{
-	const updateObject = {}
-	updateObject.update = ingredientState
-	updateObject._id = component.props.ingredient._id
+const update = (ingredientState) =>{
+	const updateObject = {};
+	updateObject.update = ingredientState;
+	updateObject._id = component.props.ingredient._id;
 	updateIngredient.call(updateObject, (error) => {
 		if (error) {
 			Bert.alert(error.reason, 'warning')
 		} else {
-			Bert.alert('Ingredient updated!', 'success')
+			Bert.alert('Ingredient updated!', 'success');
 			component.setState({ showModal: false })
 		}
-	})
-}
+	});
+	return updateObject._id
+};
 
-const insertIngredientCall = (ingredientState) => {
-	insertIngredient.call(ingredientState, (error) => {
+const insert = (ingredientState) => {
+	return insertIngredient.call(ingredientState, (error) => {
 		if (error) {
 			Bert.alert(error.reason, 'warning')
 		} else {
-			Bert.alert('Ingredient Added!', 'success')
+			Bert.alert('Ingredient Added!', 'success');
 			component.setState({ showModal: false })
 		}
 	})
-}
+};
 
-const getIngredientState = () => {
-	const name = component.state.name
-	const included = component.state.included
-	const defaultType = component.state.measurementType.name
-	const defaultSubtype = component.state.measurementSubtype.name
-	const measurement = {defaultType, defaultSubtype}
+const getState = () => {
+	const name = component.state.name;
+	const included = component.state.included;
+	const defaultType = component.state.measurementType.name;
+	const defaultSubtype = component.state.measurementSubtype.name;
+	const measurement = {defaultType, defaultSubtype};
 	return {name, included, measurement}
-}
+};
 
-const upsertIngredient = (ingredientState) => {
+const upsert = (ingredientState) => {
 	if(component.props.creating){
-		insertIngredientCall(ingredientState)
+		return insert(ingredientState)
 	}
 	else{
-		updateIngredientCall(ingredientState)
+		return update(ingredientState)
 	}
-}
-const uploadResolve = (downloadUrl) => {
-	debugger
-	this.setState({fileName: downloadUrl})
-}
-const uploadReject = (error, response) => {
-	debugger
-	console.error('Error uploading', response)
-	alert (error) // you may want to fancy this up when you're ready instead of a popup.
-}
+};
 
-const addIngredient = () => {
-	
-	const image = component.state.image
-	const uploader = component.refs.imageUploader
-	const ingredientState = getIngredientState()
+
+const add = () => {
+
+	const image = component.state.image;
+	const uploader = component.refs.imageUploader;
+	const ingredientState = getState();
+	const _id = upsert(ingredientState);
+
+	const uploadResolve = (downloadUrl) => {
+		updateIngredientImage.call({_id, image:downloadUrl});
+		Bert.alert('Image set!', 'success');
+		component.forceUpdate()
+	};
+
+	const uploadReject = (error) => {
+		if (error && error.reason) {
+			Bert.alert(error.reason, 'warning')
+		}
+	};
+
 	if(image){
-		uploader.upload()
-		upsertIngredient(ingredientState)
+		if(_id != 1){
+			uploader.upload({_id}).then(uploadResolve, uploadReject)
+		}
 	}
-	else {
-		upsertIngredient(ingredientState)
-	}
-
-
-}
+};
 
 const validate = () => {
 	$(component.refs.addIngredient).validate({
@@ -81,17 +84,17 @@ const validate = () => {
 				required: true
 			},
 		},
-		messages: 
+		messages:
 		{
 			name: {
 				required: 'Need a namehere.'
 			}
 		},
-		submitHandler() { addIngredient() }
+		submitHandler() { add() }
 	})
-}
+};
 
-export default (options) => {
-	component = options.component
-	validate()
-}
+export const submitIngredient = (options) => {
+	component = options.component;
+	validate();
+};

@@ -5,7 +5,7 @@ import { Accounts } from 'meteor/accounts-base'
 import { Bert } from 'meteor/themeteorchef:bert'
 import { getInputValue } from './get-input-value'
 
-let component
+let component;
 
 const getUserData = () => ({
 	email: getInputValue(component.refs.emailAddress),
@@ -16,20 +16,20 @@ const getUserData = () => ({
 			last: getInputValue(component.refs.lastName),
 		},
 	},
-})
+});
 
 const signUp = () => {
-	const user = getUserData()
+	const user = getUserData();
 
 	Accounts.createUser(user, (error) => {
 		if (error) {
 			Bert.alert(error.reason, 'danger')
 		} else {
-			browserHistory.push('/')
+			browserHistory.push('/');
 			Bert.alert('Welcome!', 'success')
 		}
 	})
-}
+};
 
 const validate = () => {
 	$(component.refs.signup).validate({
@@ -67,9 +67,9 @@ const validate = () => {
 		},
 		submitHandler() { signUp() }
 	})
-}
+};
 
 export const handleSignup = (options) => {
-	component = options.component
+	component = options.component;
 	validate()
-}
+};

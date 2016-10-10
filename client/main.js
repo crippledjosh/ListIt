@@ -1,2 +1,2 @@
-import '/imports/startup/client'
-import 'bootstrap-sass'
+import '/imports/startup/client';
+import 'bootstrap-sass';

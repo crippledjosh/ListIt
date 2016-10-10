@@ -5,19 +5,19 @@ import { Meteor } from 'meteor/meteor'
 import { Bert } from 'meteor/themeteorchef:bert'
 import { getInputValue } from './get-input-value'
 
-let component
+let component;
 
 const login = () => {
-	const email = getInputValue(component.refs.emailAddress)
-	const password = getInputValue(component.refs.password)
+	const email = getInputValue(component.refs.emailAddress);
+	const password = getInputValue(component.refs.password);
 
 	Meteor.loginWithPassword(email, password, (error) => {
 		if (error) {
 			Bert.alert(error.reason, 'warning')
 		} else {
-			Bert.alert('Logged in!', 'success')
+			Bert.alert('Logged in!', 'success');
 
-			const { location } = component.props
+			const { location } = component.props;
 			if (location.state && location.state.nextPathname) {
 				browserHistory.push(location.state.nextPathname)
 			} else {
@@ -25,7 +25,7 @@ const login = () => {
 			}
 		}
 	})
-}
+};
 
 const validate = () => {
 	$(component.refs.login).validate({
@@ -49,9 +49,9 @@ const validate = () => {
 		},
 		submitHandler() { login() }
 	})
-}
+};
 
 export const handleLogin = (options) => {
-	component = options.component
+	component = options.component;
 	validate()
-}
+};

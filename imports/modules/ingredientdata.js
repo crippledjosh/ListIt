@@ -1423,6 +1423,6 @@ const data = [
 		image:'http://ichef.bbci.co.uk/food/ic/food_16x9_111/recipes/pavlova_2949_16x9.jpg',
 		name:'Exotic fruit'
 	}
-]
+];
 
 export default data

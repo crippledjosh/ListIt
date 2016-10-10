@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import { Row, Col, Alert, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap'
-import { handleResetPassword } from '../../../modules/reset-password'
+import React, {Component} from 'react';
+import { Row, Col, Alert, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import { handleResetPassword } from '../../../modules/reset-password';
 
 export class ResetPassword extends Component {
 	componentDidMount() {
@@ -50,4 +50,4 @@ with your new password.
 
 ResetPassword.propTypes = {
 	params: React.PropTypes.object,
-}
+};

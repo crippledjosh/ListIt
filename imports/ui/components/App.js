@@ -1,12 +1,12 @@
-import React, {Component} from 'react'
-import Header from '../containers/header'
-import { Grid } from 'react-bootstrap'
+import React, {Component} from 'react';
+import { HeaderContainer } from '../containers/header';
+import { Grid } from 'react-bootstrap';
 
-class App extends Component{
+export class App extends Component{
 	render(){
 		return (
 			<div>
-				<Header />
+				<HeaderContainer />
 				<Grid>
 					{this.props.children}
 				</Grid>
@@ -17,6 +17,4 @@ class App extends Component{
 
 App.propTypes = {
 	children: React.PropTypes.object
-}
-
-export default App
+};

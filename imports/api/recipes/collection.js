@@ -1,12 +1,12 @@
 import { Mongo } from 'meteor/mongo'
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 
-const Recipes = new Mongo.Collection('Recipes')
+const Recipes = new Mongo.Collection('Recipes');
 
 const MeasurementSchema = new SimpleSchema({
 	type: {
 		type: String,
-		label: 'The kind description type of the measurement e.g. weight, volume, etc...'
+		label: 'The type of the measurement e.g. weight, volume, etc...'
 	},
 	subtype: {
 		type: String,
@@ -16,7 +16,7 @@ const MeasurementSchema = new SimpleSchema({
 		type: Number,
 		label: 'The amount of the ingredient required relative to the measurement type and subtype'
 	}
-})
+});
 
 const IngredientSchema = new SimpleSchema({
 	name: {
@@ -31,7 +31,7 @@ const IngredientSchema = new SimpleSchema({
 		type: MeasurementSchema,
 		label: 'The amount of the ingredient required for the recipe'
 	}
-})
+});
 
 Recipes.schema = new SimpleSchema({
 	ingredients: {
@@ -45,9 +45,13 @@ Recipes.schema = new SimpleSchema({
 	userId: {
 		type: String,
 		label: 'User that the ingredient is related to'
+	},
+	image: {
+		type: String,
+		label: 'Image of the meal the recipe is for.'
 	}
-})
+});
 
-Recipes.attachSchema(Recipes.schema)
+Recipes.attachSchema(Recipes.schema);
 
 export default Recipes

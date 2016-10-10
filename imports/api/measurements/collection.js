@@ -1,7 +1,7 @@
-import { Mongo } from 'meteor/mongo'
-import { SimpleSchema } from 'meteor/aldeed:simple-schema'
+import { Mongo } from 'meteor/mongo';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-const Measurements = new Mongo.Collection('Measurements')
+export const Measurements = new Mongo.Collection('Measurements');
 
 const SubtypeSchema = new SimpleSchema({
 	name: {
@@ -13,7 +13,7 @@ const SubtypeSchema = new SimpleSchema({
 		decimal: true,
 		label: 'The number of standard_units that fit in this subtype e.g. for type weight with standard_unit of grams the value_in_standard_unit of subtype kilgram would be 1000.'
 	},
-})
+});
 
 Measurements.schema = new SimpleSchema({
 	name: {
@@ -28,9 +28,6 @@ Measurements.schema = new SimpleSchema({
 		type: String,
 		label: 'This is the unit that is used to compare all other subtypes to each other'
 	}
-})
+});
 
-Measurements.attachSchema(Measurements.schema)
-
-
-export default Measurements
+Measurements.attachSchema(Measurements.schema);

@@ -1,13 +1,13 @@
-import React, {Component} from 'react'
-import {Button, Modal, Checkbox, FormGroup, FormControl, ControlLabel, Row} from 'react-bootstrap'
-import ImageUpload from './helpers/ImageUpload'
-import FieldGroup from './helpers/FieldGroup'
-import addIngrdient from '../../modules/add-ingredient'
+import React, {Component} from 'react';
+import { Button, Modal, Checkbox, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import { ImageUpload } from './helpers/ImageUpload';
+import { FieldGroup } from './helpers/FieldGroup';
+import { submitIngredient } from '../../modules/add-ingredient';
 import _ from 'lodash'
 
-class IngredientCreate extends Component{
+export class IngredientCreate extends Component{
 	constructor(props){
-		super(props)
+		super(props);
 		let state = {
 			showModal: false,
 			included: true,
@@ -15,19 +15,19 @@ class IngredientCreate extends Component{
 			measurementSubtype:{index:0, name:this.props.measurements[0].subtypes[0].name},
 			name: '',
 			image: undefined
-		}
+		};
 
 		if(!this.props.creating){
-			const {name, included, image, measurement} = this.props.ingredient
+			const {name, included, image, measurement} = this.props.ingredient;
 			const measurementType = {
 				name: measurement.defaultType,
 				index: this._getListIndexByName(this.props.measurements, measurement.defaultType)
-			}
+			};
 			const measurementSubtype = {
 				name: measurement.defaultSubtype,
 				index: this._getListIndexByName(this.props.measurements[measurementType.index].subtypes, measurement.defaultSubtype)
-			}
-			_.assign(state,
+			};
+			Object.assign(state,
 				{
 					name,
 					included,
@@ -45,29 +45,31 @@ class IngredientCreate extends Component{
 		return _.findIndex(array, (measurement) => {
 			return measurement.name == name
 		})
-	}
+	};
+
+
 
 	handleSubmit = (event) => {
 		event.preventDefault()
-	}
+	};
 
 	close = () => {
 		this.setState({ showModal: false })
-	}
+	};
 
 	open = () => {
 		this.setState({ showModal: true })
-	}
+	};
 
 	save = () => {
-		addIngrdient({ component: this })
-	}
+		submitIngredient({ component: this })
+	};
 	checkboxHandler = (event) => {
 		this.setState({included:event.target.checked})
-	}
+	};
 	renderOption = (measurement) => {
 		return <option key={measurement.name} value={measurement.name}>{measurement.name}</option>
-	}
+	};
 	renderMeasurementTypes = () => {
 		return (
 			this.props.measurements.map((measurement) => {
@@ -76,27 +78,27 @@ class IngredientCreate extends Component{
 				)
 			})
 		)
-	}
+	};
 
 	renderMeasurementSubtypes = () =>{
 		return (
 			this.props.measurements[this.state.measurementType.index].subtypes.map((measurement) => {
 				return(
-					this.renderOption(measurement)	
-				)
+					this.renderOption(measurement)
+				);
 			})
 		)
-	}
+	};
 
 	controlChangeHandler = (e) =>{
 		this.setState({
 			[e.target.name] : e.target.value
 		})
-	}
+	};
 
 	measurementTypeSelectHandler = (e) =>{
-		const name = e.target.value
-		const index = this._getListIndexByName(this.props.measurements, name)
+		const name = e.target.value;
+		const index = this._getListIndexByName(this.props.measurements, name);
 		this.setState(
 			{
 				measurementType:
@@ -110,28 +112,28 @@ class IngredientCreate extends Component{
 				}
 			}
 		)
-	}
+	};
 	measurementSubtypeSelectHandler = (e) =>{
-		const name = e.target.value
-		const index = this._getListIndexByName(this.props.measurements[this.state.measurementType.index].subtypes, name)
+		const name = e.target.value;
+		const index = this._getListIndexByName(this.props.measurements[this.state.measurementType.index].subtypes, name);
 		this.setState(
 			{
 				measurementSubtype:
 				{
-					
+
 					name,
 					index
 				}
 			}
 		)
-	}
+	};
 	onDrop = (file) =>{
 		this.setState(
 			{
 				image: file
 			}
 		)
-	}
+	};
 	render() {
 		return (
 			<div>
@@ -194,6 +196,4 @@ IngredientCreate.propTypes = {
 	ingredient: React.PropTypes.object,
 	buttonClass: React.PropTypes.string
 
-}
-
-export default IngredientCreate
+};

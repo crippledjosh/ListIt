@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import { Link } from 'react-router'
-import { Row, Col, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap'
-import { handleLogin } from '../../../modules/login'
+import React, {Component} from 'react';
+import { Link } from 'react-router';
+import { Row, Col, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import { handleLogin } from '../../../modules/login';
 
 export class Login extends Component {
 

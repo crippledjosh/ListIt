@@ -1,7 +1,7 @@
 import { Mongo } from 'meteor/mongo'
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 
-const Ingredients = new Mongo.Collection('Ingredients')
+export const Ingredients = new Mongo.Collection('Ingredients');
 
 export const MeasurementSchema = new SimpleSchema({
 	defaultType: {
@@ -12,7 +12,7 @@ export const MeasurementSchema = new SimpleSchema({
 		type: String,
 		label: 'Measurement subtype that this ingredient should default to.'
 	}
-})
+});
 
 Ingredients.schema = new SimpleSchema({
 	name: {
@@ -35,15 +35,12 @@ Ingredients.schema = new SimpleSchema({
 		type: MeasurementSchema,
 		label: 'Object representing the measurement defaults of the ingredient'
 	}
-})
+});
 
-Ingredients.attachSchema(Ingredients.schema)
+Ingredients.attachSchema(Ingredients.schema);
 
 if(Meteor.isServer){
 	Ingredients._ensureIndex({
 		'name': 1
 	})
 }
-
-
-export default Ingredients

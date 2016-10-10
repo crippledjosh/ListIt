@@ -1,10 +1,10 @@
-import App from '../ui/components/App'
-import IngredientList from '../ui/containers/ingredients-list'
-import IngredientView from '../ui/containers/ingredient-view'
-import RecipesList from '../ui/containers/recipes-list'
-import Landing from '../ui/pages/Landing'
+import {App} from '../ui/components/App'
+import { IngredientsListContainer } from '../ui/containers/ingredients-list'
+import { IngredientViewContainer } from '../ui/containers/ingredient-view'
+import { RecipesListContainer } from '../ui/containers/recipes-list'
+import { Landing } from '../ui/pages/Landing'
 import { Login } from '../ui/pages/auth/Login'
-import NotFound from '../ui/pages/NotFound'
+import { NotFound } from '../ui/pages/NotFound'
 import { RecoverPassword } from '../ui/pages/auth/RecoverPassword'
 import { ResetPassword } from '../ui/pages/auth/ResetPassword'
 import { Signup } from '../ui/pages/auth/Signup'
@@ -15,10 +15,10 @@ const requireAuth = (nextState, replace) => {
 		replace({
 			pathname: '/login',
 			state: { nextPathname: nextState.location.pathname },
-		})
+		});
 		return true
 	}
-}
+};
 
 const routes = {
 	component : App,
@@ -50,22 +50,22 @@ const routes = {
 		},
 		{
 			path: 'ingredients',
-			component: IngredientList,
+			component: IngredientsListContainer,
 			onEnter: requireAuth
 		},
 		{
 			path: 'ingredients/:limit',
-			component: IngredientList,
+			component: IngredientsListContainer,
 			onEnter: requireAuth
 		},
 		{
 			path: 'ingredient/:id',
-			component: IngredientView,
+			component: IngredientViewContainer,
 			onEnter: requireAuth
 		},
 		{
 			path: 'recipes',
-			component: RecipesList
+			component: RecipesListContainer
 		},
 		{
 			path: 'shopping-list',
@@ -76,6 +76,6 @@ const routes = {
 			component: NotFound
 		}
 	]
-}
+};
 
 export default routes

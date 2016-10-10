@@ -1,14 +1,12 @@
-import Ingredients from '../collection.js'
+import {Ingredients} from '../collection.js'
 import IngredientGenerator from '../../../modules/ingredient-generator'
 
-
-const userId = Meteor.users.findOne({'emails.0.address': 'admin@admin.com'})._id
-
-let data = IngredientGenerator(200)
 Meteor.startup(() => {
 	if(!Ingredients.find({}).count()){
+		const userId = Meteor.users.findOne({'emails.0.address': 'admin@admin.com'})._id;
+		let data = IngredientGenerator(200);
 		data.forEach(function (ingredient) {
-			const {name, image} = ingredient
+			const {name, image} = ingredient;
 			Ingredients.insert({
 				name,
 				image,
@@ -21,4 +19,4 @@ Meteor.startup(() => {
 			})
 		})
 	}
-})
+});
